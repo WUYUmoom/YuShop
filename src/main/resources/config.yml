@@ -1,0 +1,8 @@
+Settings:
+
+# 消息设置
+#可选择两种方式Message与Title
+#Message方式 直接写上信息即可
+#Title这样的方式 Title,主标题,副标题,0,20,0
+Message:
+  Reload: "&b插件通知 &f➢ &a重载成功."

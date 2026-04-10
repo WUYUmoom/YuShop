@@ -1,0 +1,7 @@
+name: YuShop
+version: '1.0.0'
+main: com.wuyumoom.yushop.YuShop
+api-version: '1.21'
+depend: [ YuCore ]
+commands:
+  yushop:

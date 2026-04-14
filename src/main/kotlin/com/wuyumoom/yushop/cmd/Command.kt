@@ -1,7 +1,10 @@
 package com.wuyumoom.yushop.cmd
 
+import com.wuyumoom.yucore.api.NMS
+import com.wuyumoom.yushop.YuShop
 import com.wuyumoom.yushop.config.ConfigManager
 import com.wuyumoom.yushop.view.ShopGUI
+import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabExecutor
@@ -15,8 +18,24 @@ object Command: TabExecutor {
         args: Array<String>
     ): Boolean {
         if (sender is Player){
-            val configuration = ConfigManager.viewConfigurationMap["默认个人商店"]!!
-            ShopGUI.open(configuration,sender, ConfigManager.shop["默认个人商店"]!!)
+            if (args.isNotEmpty()){
+                if (args[0]=="item"){
+                    val mnsItemStack = NMS.getMNSItemStack(sender.inventory.itemInMainHand)
+                    val save = mnsItemStack.save(YuShop.reg)
+                    Bukkit.getConsoleSender().sendMessage("物品nbt:$save")
+                    return true
+                }
+                if (args[0]=="reload"){
+                    if (!sender.hasPermission("yushop.reload")){
+                        return true
+                    }
+                    ConfigManager.reload()
+                    sender.sendMessage("§a重载成功")
+                    return true
+                }
+                val configuration = ConfigManager.viewConfigurationMap[args[0]]?:return true
+                ShopGUI.open(configuration,sender, ConfigManager.shop[args[0]]!!)
+            }
         }
         return true
     }
@@ -27,6 +46,28 @@ object Command: TabExecutor {
         label: String,
         args: Array<String>
     ): List<String> {
-        return mutableListOf()
+        if (args.isEmpty()) {
+            return emptyList()
+        }
+
+        return when (args.size) {
+            1 -> {
+                val input = args[0].lowercase()
+                val suggestions = mutableListOf<String>()
+
+                // 添加子命令
+                suggestions.add("item")
+                suggestions.add("reload")
+
+                // 添加所有商店名称
+                ConfigManager.shop.keys.forEach { shopName ->
+                    suggestions.add(shopName)
+                }
+
+                // 过滤并排序
+                suggestions.filter { it.lowercase().startsWith(input) }.sorted()
+            }
+            else -> emptyList()
+        }
     }
 }

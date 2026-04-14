@@ -1,12 +1,15 @@
 package com.wuyumoom.yushop.view
 
+import com.wuyumoom.yucore.api.ItemStackAPI
 import com.wuyumoom.yucore.file.view.ViewConfiguration
 import com.wuyumoom.yucore.view.GuiSession
+import com.wuyumoom.yushop.api.data.DataManager
 import com.wuyumoom.yushop.model.Product
 import com.wuyumoom.yushop.model.Shop
 import com.wuyumoom.yushop.util.getWeightedTask
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
+import org.bukkit.inventory.ItemStack
 import kotlin.collections.component1
 import kotlin.collections.component2
 
@@ -19,70 +22,56 @@ object ShopGUI {
         val guiSession = GuiSession(viewConfiguration, player)
         guiSession.onClick { event ->
             event.isCancelled = true
+            val item = event.currentItem ?: return@onClick
+            val nbt = ItemStackAPI.getNBT(item, "yubutton") ?: return@onClick
+            val product = shop.product[nbt]
+            if (product != null) {
+                val count = ItemStackAPI.getNBT(item, "yushopcount")?.toInt() ?: return@onClick
+                shop.shopType.execute(product,player, count,shop)
+                draw(player,shop,viewConfiguration,guiSession)
+            }
         }
+        draw(player,shop,viewConfiguration,guiSession)
+        guiSession.open()
+    }
+    fun draw(player: Player,shop: Shop,viewConfiguration: ViewConfiguration,guiSession: GuiSession){
         var index = -1
-        getRandomProduct(shop).forEach { product ->
-            Bukkit.getConsoleSender().sendMessage("正在打开界面: ${product.name}")
-            val button = viewConfiguration.button[product.name]
-            if (button == null){
-                Bukkit.getConsoleSender().sendMessage("未找到商品按钮: ${product.name}")
+        val data = DataManager.getData(player.name)
+        val playerShopData = data.shopData[shop.name] ?: return
+        playerShopData.product.forEach { (name, count) ->
+            val button = viewConfiguration.button[name]
+            if (button == null) {
+                Bukkit.getConsoleSender().sendMessage("[YuShop] 界面配置错误")
                 return@forEach
             }
             index++
-            val i = shop.shopSlot[index]
-            Bukkit.getConsoleSender().sendMessage("添加位置$i")
-            guiSession.inventory.setItem(i, button.itemStack)
-            Bukkit.getConsoleSender().sendMessage("已打开界面: ${product.name}")
+            val clone = button.itemStack.clone()
+            val product = shop.product[name] ?: return@forEach
+            val itemStack = ItemStackAPI.setNBT(
+                setLore(
+                    clone,count,product.getLimit(data, shop),product.limitMax
+                ), "yushopcount", count.toString())
+            guiSession.inventory.setItem(shop.shopSlot[index], itemStack)
         }
-        guiSession.open()
     }
 
     /**
-     * 获取随机商品
+     * 设置lore显示
      */
-    fun getRandomProduct(shop: Shop): MutableList<Product> {
-        // 预先获取所有可用商品
-        val availableTasks = mutableListOf<Product>()
-        shop.product.forEach { (weight, tasks) ->
-            tasks.forEach { task ->
-                availableTasks.add(task)
-            }
-        }
-        // 移除重复商品
-        val uniqueAvailableTasks = availableTasks.distinct()
-        // 如果可用任务少于所需数量，返回所有可用任务
-        if (uniqueAvailableTasks.size <= shop.shopSlot.size) {
-            return uniqueAvailableTasks.toMutableList()
-        }
-        // 使用加权随机选择不重复的任务
-        val selectedTasks = mutableSetOf<Product>()
-        val validTaskMap = mutableMapOf<Int, MutableList<Product>>()
-        // 仅包含可接受的任务到权重映射中
-        shop.product.forEach { (weight, tasks) ->
-            val validTasks = tasks.filter { task ->
-                task !in selectedTasks
-            }.toMutableList()
-            if (validTasks.isNotEmpty()) {
-                validTaskMap[weight] = validTasks
-            }
-        }
-        // 随机选择直到达到所需数量或没有更多任务
-        while (selectedTasks.size < shop.shopSlot.size && validTaskMap.isNotEmpty()) {
-            try {
-                val task = validTaskMap.getWeightedTask()
-                if (task !in selectedTasks) {
-                    selectedTasks.add(task)
-                } else {
-                    // 如果选中了已有的任务，继续尝试
-                    continue
-                }
-            } catch (e: IllegalStateException) {
-                // 如果权重映射为空，跳出循环
-                break
-            }
+    fun setLore(item: ItemStack, count: Int,shopCount: Int,limitMax: Int): ItemStack {
+        val clone = item.clone()
+        val itemMeta = clone.itemMeta ?: return clone
+
+        val originalLore = itemMeta.lore ?: return clone
+        val newLore = originalLore.map { line ->
+            line.replace("%price%", count.toString())
+                .replace("%limit_count%", shopCount.toString())
+                .replace("%limit_max%", limitMax.toString())
         }
 
-        return selectedTasks.toMutableList()
+        itemMeta.lore = newLore
+        clone.itemMeta = itemMeta
+        return clone
     }
 
 }

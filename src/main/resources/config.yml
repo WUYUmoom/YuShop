@@ -1,8 +1,21 @@
+# 存储方式配置
+Storage:
+  # 存储方式: YML 或 MYSQL
+  mode: "YML"
+  # MySQL配置
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "yushop"
+    username: "root"
+    password: "password"
 Settings:
-
 # 消息设置
 #可选择两种方式Message与Title
 #Message方式 直接写上信息即可
 #Title这样的方式 Title,主标题,副标题,0,20,0
 Message:
   Reload: "&b插件通知 &f➢ &a重载成功."
+  no_enough: "&b您的余额不足!"
+  no_limit: "&b购买或兑换次数上线"
+  no_item: "&b没有此物品"

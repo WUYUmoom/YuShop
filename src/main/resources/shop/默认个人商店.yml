@@ -1,6 +1,6 @@
 title: "&8个人商店"
 size: 54
-#商店类型，BUY是出售、SELL是购买
+#商店类型，BUY是购买、SELL是出售
 shop_type: "BUY"
   #商品分布
 shop_slot: "10,11,12,13,14,15,16,19,20,21,22,23,24,25,26,27,28,29"
@@ -9,17 +9,24 @@ Button:
     name: "&6测试商品"
     id: "PAPER"
     lore:
+      - "&7价格: &a%price%"
+      - "&7限购: &a%limit_max%/%limit_count%"
       - "&e点击购买测试商品"
     #不用管
     load: false
     #购买后执行的指令
     command:
       - "say 玩家购买测试商品"
+    item:
     limit:
       #Personal为个人限购 Server 全服限购
       type: "Personal"
       #最大购买数量
       max: 5
+    #货币类型Vault是金币, Points是点卷 ,Nye
+    currency: "Vault"  # 货币类型
+    #如果是nye需要填写货币名称
+    nye: "测试"
     #商品最小价格
     min_price: 100
     #商品最大价格

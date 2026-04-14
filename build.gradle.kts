@@ -33,6 +33,14 @@ repositories {
         name = "placeholderapi"
         url = uri("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     }
+    maven {
+        name = "jitpack"
+        url = uri("https://jitpack.io")
+    }
+    maven {
+        name = "rosewood-repo"
+        url = uri("https://repo.rosewooddev.io/repository/public/")
+    }
 }
 dependencies {
     /*<-minecraft->*/
@@ -40,7 +48,7 @@ dependencies {
     mappings(loom.officialMojangMappings())
     //mappings "net.fabricmc:yarn:1.21.1+build.3:v2"
 
-    compileOnly("wuyumoom:yucore:1.6.6:YuCore@jar")
+    modCompileOnly("wuyumoom:yucore:1.6.6:YuCore@jar")
     /*<-cobblemon->*/
 
     /*<-spigot->*/
@@ -49,7 +57,11 @@ dependencies {
     compileOnly("me.clip:placeholderapi:2.11.6")
     //NBTAPI
     compileOnly("de.tr7zw:item-nbt-api-plugin:2.14.2-SNAPSHOT")
-
+    //Vault API
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
+    //PlayerPoints API
+    compileOnly("org.black_ixx:playerpoints:3.2.5")
+    compileOnly(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
 tasks.named<ProcessResources>("processResources") {
@@ -57,7 +69,6 @@ tasks.named<ProcessResources>("processResources") {
     filesMatching("plugin.yml") {
         expand(
             "version" to (project.version as String).replace("-SNAPSHOT", ""),
-            "description" to "经典相片V3全新版本",
             "author" to "WUYUmoom"
         )
     }

@@ -7,7 +7,9 @@ import com.wuyumoom.yucore.file.view.ViewConfiguration
 import com.wuyumoom.yushop.YuShop
 import com.wuyumoom.yushop.api.data.DataManager
 import com.wuyumoom.yushop.api.data.StorageType
+import com.wuyumoom.yushop.listener.PluginEvent
 import com.wuyumoom.yushop.model.Shop
+import org.bukkit.Bukkit
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 
@@ -55,6 +57,7 @@ object ConfigManager {
         }else{
             DatabaseManager.connect()
             if (DatabaseManager.isConnected()) {
+                Bukkit.getPluginManager().registerEvents(PluginEvent(), YuShop.INSTANCE)
                 YuShop.INSTANCE.server.logger.info("§a数据库连接成功")
             }
         }

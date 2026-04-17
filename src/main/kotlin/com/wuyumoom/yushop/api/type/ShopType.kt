@@ -11,43 +11,45 @@ import org.bukkit.entity.Player
 
 enum class ShopType {
     BUY {
-        override fun execute(product: Product,player: Player, count: Int,shop: Shop) {
+        override fun execute(product: Product,player: Player, count: Int,shop: Shop,executeCount: Int) {
             // 判断经济
-            if (!product.currency.hasEnough(player,count)){
+            if (!product.currency.hasEnough(player,count,executeCount)){
                 ConfigManager.message.sendMessage("no_enough",player)
                 return
             }
             val data = DataManager.getData(player.name)
             // 判断次数
             val limit = product.getLimit(data, shop)
-            if (limit >= product.limitMax){
+            if (limit +executeCount > product.limitMax){
                 ConfigManager.message.sendMessage("no_limit",player)
                 return
             }
-            product.currency.take(player,count)
-            product.command.forEach {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(),it.replace("%player%",player.name))
+            for (i in 0 until executeCount){
+                product.currency.take(player,count)
+                product.command.forEach {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(),it.replace("%player%",player.name))
+                }
             }
-            product.limit.updateProduct(data,product.name,shop)
+            product.limit.updateProduct(data,product.name,shop,executeCount)
         }
     },
     SELL {
-        override fun execute(product: Product,player: Player, count: Int,shop: Shop) {
-            if (!hasItemInInventory(player, product.item)) {
+        override fun execute(product: Product,player: Player, count: Int,shop: Shop,executeCount: Int) {
+            if (hasItemInInventory(player, product.item) >= executeCount) {
                 ConfigManager.message.sendMessage("no_item",player)
                 return
             }
             val data = DataManager.getData(player.name)
             // 判断次数
             val limit = product.getLimit(data, shop)
-            if (limit >= product.limitMax){
+            if (limit + executeCount > product.limitMax){
                 ConfigManager.message.sendMessage("no_limit",player)
                 return
             }
-            product.currency.give(player,count)
-            product.limit.updateProduct(data,product.name,shop)
-            removeItemFromInventory(player, product.item)
+            product.currency.give(player,(count*executeCount))
+            product.limit.updateProduct(data,product.name,shop,executeCount)
+            removeItemFromInventory(player, product.item,executeCount)
         }
     };
-    abstract fun execute(product: Product,player: Player, count: Int,shop: Shop)
+    abstract fun execute(product: Product,player: Player, count: Int,shop: Shop,executeCount: Int= 1)
 }

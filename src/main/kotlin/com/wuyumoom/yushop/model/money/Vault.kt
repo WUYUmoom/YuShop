@@ -13,8 +13,8 @@ class Vault: IMoney {
         YuShop.economy.withdrawPlayer(player, count.toDouble())
     }
 
-    override fun hasEnough(player: Player, count: Int): Boolean {
+    override fun hasEnough(player: Player, count: Int,executeCount: Int): Boolean {
         val balance = YuShop.economy.getBalance(player)
-        return balance >= count
+        return balance >= (count*executeCount)
     }
 }

@@ -53,9 +53,9 @@ enum class StorageType {
             return ConfigManager.dataLimit.getInt("${shop}.${product}")
         }
 
-        override fun updateProduct(product: String, shop: String) {
+        override fun updateProduct(product: String, shop: String,executeCount: Int) {
             val limit = getLimit(product, shop)
-            ConfigManager.dataLimit.set("${shop}.${product}",limit+1)
+            ConfigManager.dataLimit.set("${shop}.${product}",limit+executeCount)
         }
 
         override fun upServerLimit() {
@@ -81,8 +81,8 @@ enum class StorageType {
             return DatabaseManager.getServerLimit(shop, product)
         }
 
-        override fun updateProduct(product: String, shop: String) {
-            DatabaseManager.updateServerLimit(shop, product)
+        override fun updateProduct(product: String, shop: String,executeCount: Int) {
+            DatabaseManager.updateServerLimit(shop, product,executeCount)
         }
 
         override fun upServerLimit() {
@@ -93,7 +93,7 @@ enum class StorageType {
     abstract fun save(data: PlayerData)
     abstract fun load(player: String): PlayerData
     abstract fun getLimit(product: String,shop: String): Int
-    abstract fun updateProduct(product: String,shop: String)
+    abstract fun updateProduct(product: String,shop: String,executeCount: Int)
     abstract fun upServerLimit()
 }
 
@@ -119,8 +119,8 @@ object DataManager {
     /**
      * 更新服务器限制次数
      */
-    fun updateServerLimit(product: String,shop: String) {
-        storageType.updateProduct(product,shop)
+    fun updateServerLimit(product: String,shop: String,executeCount: Int) {
+        storageType.updateProduct(product,shop,executeCount)
     }
 
     /**

@@ -13,8 +13,8 @@ class Points: IMoney {
         PlayerPoints.getInstance().api.take(player.uniqueId, count)
     }
 
-    override fun hasEnough(player: Player, count: Int): Boolean {
+    override fun hasEnough(player: Player, count: Int,executeCount: Int): Boolean {
         val look = PlayerPoints.getInstance().api.look(player.uniqueId)
-        return look >= count
+        return look >= (count*executeCount)
     }
 }

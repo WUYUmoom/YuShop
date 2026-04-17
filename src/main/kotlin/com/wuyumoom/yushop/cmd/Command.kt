@@ -20,7 +20,12 @@ object Command: TabExecutor {
         if (sender is Player){
             if (args.isNotEmpty()){
                 if (args[0]=="item"){
-                    val mnsItemStack = NMS.getMNSItemStack(sender.inventory.itemInMainHand)
+                    val itemInMainHand = sender.inventory.itemInMainHand
+                    if (itemInMainHand.type == org.bukkit.Material.AIR){
+                        sender.sendMessage("请将物品放入主手")
+                        return true
+                    }
+                    val mnsItemStack = NMS.getMNSItemStack(itemInMainHand)
                     val save = mnsItemStack.save(YuShop.reg)
                     Bukkit.getConsoleSender().sendMessage("物品nbt:$save")
                     return true
@@ -35,6 +40,8 @@ object Command: TabExecutor {
                 }
                 val configuration = ConfigManager.viewConfigurationMap[args[0]]?:return true
                 ShopGUI.open(configuration,sender, ConfigManager.shop[args[0]]!!)
+            }else{
+                return true
             }
         }
         return true
@@ -49,7 +56,6 @@ object Command: TabExecutor {
         if (args.isEmpty()) {
             return emptyList()
         }
-
         return when (args.size) {
             1 -> {
                 val input = args[0].lowercase()

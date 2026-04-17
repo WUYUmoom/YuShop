@@ -362,17 +362,19 @@ object DatabaseManager {
      * @param shopName 商店名称
      * @param productName 商品名称
      */
-    fun updateServerLimit(shopName: String, productName: String) {
+    fun updateServerLimit(shopName: String, productName: String, count: Int) {
         val conn = ensureConnection() ?: return
 
         try {
             conn.prepareStatement("""
                 INSERT INTO `yushop_server_limit` (`shop_name`, `product_name`, `purchase_count`) 
-                VALUES (?, ?, 1) 
-                ON DUPLICATE KEY UPDATE `purchase_count` = `purchase_count` + 1
+                VALUES (?, ?, ?) 
+                ON DUPLICATE KEY UPDATE `purchase_count` = `purchase_count` + ?
             """.trimIndent()).use { stmt ->
                 stmt.setString(1, shopName)
                 stmt.setString(2, productName)
+                stmt.setInt(3, count)
+                stmt.setInt(4, count)
                 stmt.executeUpdate()
             }
         } catch (e: SQLException) {

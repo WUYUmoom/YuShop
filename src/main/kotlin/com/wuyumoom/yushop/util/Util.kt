@@ -66,22 +66,19 @@ fun getRandomProduct(shop: Shop): MutableList<Product> {
  * @param requiredAmount 需要的数量，默认为1
  * @return 如果玩家背包中有足够的物品返回true，否则返回false
  */
-fun hasItemInInventory(player: Player, targetItem: ItemStack, requiredAmount: Int = 1): Boolean {
-    if (requiredAmount <= 0) return true
-    if (targetItem.type.isAir) return false
+fun hasItemInInventory(player: Player, targetItem: ItemStack, requiredAmount: Int = 1): Int {
+    if (requiredAmount <= 0) return 0
+    if (targetItem.type.isAir) return 0
 
     var totalCount = 0
 
     for (item in player.inventory.contents) {
         if (item != null && item.isSimilar(targetItem)) {
             totalCount += item.amount
-            if (totalCount >= requiredAmount) {
-                return true
-            }
         }
     }
 
-    return false
+    return totalCount
 }
 
 /**
@@ -163,8 +160,6 @@ fun <Task> MutableMap<Int, MutableList<Task>>.getWeightedTask(random: Random = R
             }
         }
     }
-
-    // Fallback to last entry (should not reach here, but safety check)
     val lastEntry = validEntries.last()
     if (lastEntry.value.isEmpty()) {
         throw IllegalStateException("Last entry task list is empty")

@@ -15,9 +15,9 @@ class Nye(val nye: String): IMoney {
         NyEconomyAPI.getInstance().withdraw(checkVaultType, player.uniqueId, count)
     }
 
-    override fun hasEnough(player: Player, count: Int): Boolean {
+    override fun hasEnough(player: Player, count: Int,executeCount: Int): Boolean {
         val checkedType = NyEconomyAPI.getInstance().checkVaultType(nye)
         val balance = NyEconomyAPI.getInstance().getBalance(checkedType, player.name)
-        return balance >= count
+        return balance >= (count*executeCount)
     }
 }

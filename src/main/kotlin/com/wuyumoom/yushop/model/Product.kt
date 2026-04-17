@@ -1,5 +1,6 @@
 package com.wuyumoom.yushop.model
 
+import com.wuyumoom.yucore.api.BukkitAPI
 import com.wuyumoom.yucore.api.NMS
 import com.wuyumoom.yushop.YuShop
 import com.wuyumoom.yushop.api.type.ShopLimit
@@ -18,6 +19,7 @@ import kotlin.math.pow
 
 class Product(
     val name: String,
+    val itemName: String,
     val command: MutableList<String>,
     val limit: ShopLimit,
     val limitMax: Int,
@@ -80,6 +82,7 @@ class Product(
          */
         fun create(configurationSection: ConfigurationSection): Product {
             val name = configurationSection.name
+            val itemName = BukkitAPI.onReplace(configurationSection.getString("name") ?: name)
             val command = configurationSection.getStringList("command")
             val shopLimit = ShopLimit.valueOf(configurationSection.getString("limit.type") ?: "Personal")
             val limitMax = configurationSection.getInt("limit.max")
@@ -103,6 +106,7 @@ class Product(
             }
             return Product(
                 name,
+                itemName,
                 command,
                 shopLimit,
                 limitMax,

@@ -7,10 +7,10 @@ import com.wuyumoom.yushop.model.Shop
 
 enum class ShopLimit {
     Personal {
-        override fun updateProduct(data: PlayerData, product: String,shop: Shop) {
+        override fun updateProduct(data: PlayerData, product: String,shop: Shop,executeCount: Int) {
             val playerShopData = data.shopData[shop.name]
             if (playerShopData != null){
-                playerShopData.limit[product] = playerShopData.limit.getOrDefault(product,0)+1
+                playerShopData.limit[product] = playerShopData.limit.getOrDefault(product,0)+executeCount
             }else{
                 data.updateProduct()
             }
@@ -26,8 +26,8 @@ enum class ShopLimit {
         }
     },
     Server {
-        override fun updateProduct(data: PlayerData, product: String,shop: Shop) {
-            DataManager.updateServerLimit(product,shop.name)
+        override fun updateProduct(data: PlayerData, product: String,shop: Shop,executeCount: Int) {
+            DataManager.updateServerLimit(product,shop.name,executeCount)
         }
 
         override fun getLimit(
@@ -41,7 +41,7 @@ enum class ShopLimit {
     /**
      * 更新购买次数
      */
-    abstract fun updateProduct(data: PlayerData, product: String,shop: Shop)
+    abstract fun updateProduct(data: PlayerData, product: String,shop: Shop,executeCount: Int)
 
     /**
      * 获取可购买次数

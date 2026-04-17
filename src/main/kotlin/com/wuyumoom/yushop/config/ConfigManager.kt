@@ -17,6 +17,11 @@ object ConfigManager {
     var config = YuShop.INSTANCE.config
     var message: Message = Message(config)
     val viewConfigurationMap: MutableMap<String, ViewConfiguration> = HashMap()
+
+
+    lateinit var buy: ViewConfiguration
+    var buyCount: MutableMap<String, Int> = mutableMapOf()
+
     var dataFile: File = File(YuShop.pluginFile, "data")
     var storage_mode : StorageType = StorageType.YML
 
@@ -39,6 +44,17 @@ object ConfigManager {
         message = Message(config)
         storage_mode = StorageType.valueOf(config.getString("Storage.mode")!!)
         DataManager.init(storage_mode)
+        FileAPI.folderFiles(YuShop.INSTANCE, "view", YuShop.pluginFile).forEach { file ->
+            val loadConfiguration = YamlConfiguration.loadConfiguration(file)
+            buy = ViewConfiguration(loadConfiguration)
+            loadConfiguration.getConfigurationSection("Button")!!.getKeys(false).forEach {
+                val int = loadConfiguration.getInt("Button.${it}.count")
+                if (int > 0){
+                    buyCount[it] = int
+                }
+            }
+            return@forEach
+        }
         FileAPI.folderFiles(YuShop.INSTANCE, "shop", YuShop.pluginFile).forEach { file ->
             val name = file.name.replace(".yml", "")
             val loadConfiguration = YamlConfiguration.loadConfiguration(file)

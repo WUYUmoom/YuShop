@@ -11,6 +11,7 @@ import org.bukkit.entity.Player
 
 enum class ShopType {
     BUY {
+
         override fun execute(product: Product,player: Player, count: Int,shop: Shop,executeCount: Int) {
             // 判断经济
             if (!product.currency.hasEnough(player,count,executeCount)){
@@ -34,6 +35,7 @@ enum class ShopType {
         }
     },
     SELL {
+
         override fun execute(product: Product,player: Player, count: Int,shop: Shop,executeCount: Int) {
             if (hasItemInInventory(player, product.item) >= executeCount) {
                 ConfigManager.message.sendMessage("no_item",player)
@@ -51,5 +53,9 @@ enum class ShopType {
             removeItemFromInventory(player, product.item,executeCount)
         }
     };
+
+    /**
+     * 购买全部
+     */
     abstract fun execute(product: Product,player: Player, count: Int,shop: Shop,executeCount: Int= 1)
 }

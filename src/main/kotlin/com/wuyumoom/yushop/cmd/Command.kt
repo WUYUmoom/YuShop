@@ -39,7 +39,7 @@ object Command: TabExecutor {
                     return true
                 }
                 val configuration = ConfigManager.viewConfigurationMap[args[0]]?:return true
-                ShopGUI.open(configuration,sender, ConfigManager.shop[args[0]]!!)
+                ShopGUI().open(configuration,sender, ConfigManager.shop[args[0]]!!)
             }else{
                 return true
             }

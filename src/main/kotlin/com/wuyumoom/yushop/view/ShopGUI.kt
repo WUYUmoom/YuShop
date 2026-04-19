@@ -4,16 +4,22 @@ import com.wuyumoom.yucore.api.ItemStackAPI
 import com.wuyumoom.yucore.file.view.ViewConfiguration
 import com.wuyumoom.yucore.view.GuiSession
 import com.wuyumoom.yushop.api.data.DataManager
+import com.wuyumoom.yushop.api.data.PlayerData
+import com.wuyumoom.yushop.api.type.ShopType
 import com.wuyumoom.yushop.model.Product
 import com.wuyumoom.yushop.model.Shop
 import com.wuyumoom.yushop.util.getWeightedTask
+import com.wuyumoom.yushop.util.hasItemInInventory
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import kotlin.collections.component1
 import kotlin.collections.component2
 
-object ShopGUI {
+class ShopGUI() {
+    var product: Product? = null
+    var count: Int = 1
+    var price = 0
 
     /**
      * 打开界面
@@ -26,10 +32,76 @@ object ShopGUI {
             val nbt = ItemStackAPI.getNBT(item, "yubutton") ?: return@onClick
             val product = shop.product[nbt]
             if (product != null) {
-                val count = ItemStackAPI.getNBT(item, "yushopcount")?.toInt() ?: return@onClick
+                this.product = product
+                setBuyButton(viewConfiguration,guiSession)
+                price  = ItemStackAPI.getNBT(item, "yushopcount")?.toInt() ?: return@onClick
 //                shop.shopType.execute(product,player, count,shop)
 //                draw(player,shop,viewConfiguration,guiSession)
-                BuyGUI(shop,product,count).open(player)
+                //BuyGUI(shop,product,count).open(player)
+            }else{
+                when(nbt){
+                    "购买加1"->{
+                        count++
+                        setBuyButton(viewConfiguration,guiSession)
+                    }
+                    "购买减1"->{
+                        if (count <= 1){
+                            count = 1
+                            return@onClick
+                        }
+                        count--
+                        setBuyButton(viewConfiguration,guiSession)
+                    }
+                    "购买加10"->{
+                        count += 10
+                        setBuyButton(viewConfiguration,guiSession)
+                    }
+                    "购买减10"->{
+                        if (count <= 10){
+                            count = 1
+                            return@onClick
+                        }
+                        count -= 10
+                        setBuyButton(viewConfiguration,guiSession)
+                    }
+                    "确定购买"->{
+                        val currentProduct = this.product
+                        if (currentProduct == null){
+                            return@onClick
+                        }
+                        shop.shopType.execute(currentProduct,player, price,shop,count)
+                    }
+                    "购买全部"->{
+                        if (shop.shopType == ShopType.BUY){
+                            val currentProduct = this.product
+                            if (currentProduct == null){
+                                return@onClick
+                            }
+                            val data = DataManager.getData(player.name)
+                            val limit = currentProduct.getLimit(data, shop)
+                            count = currentProduct.currency.getCanBuyCount(player,price)
+                            if (count > limit){
+                                count = limit
+                            }
+                            setBuyButton(viewConfiguration,guiSession)
+                        }
+                        if (shop.shopType == ShopType.SELL){
+                            val currentProduct = this.product
+                            if (currentProduct == null){
+                                return@onClick
+                            }
+                            val data = DataManager.getData(player.name)
+                            val limit = currentProduct.getLimit(data, shop)
+                            val hasItemInInventory = hasItemInInventory(player, currentProduct.item, count)
+                            count = if (hasItemInInventory < limit){
+                                hasItemInInventory
+                            }else{
+                                limit
+                            }
+                            setBuyButton(viewConfiguration,guiSession)
+                        }
+                    }
+                }
             }
         }
         draw(player,shop,viewConfiguration,guiSession)
@@ -53,6 +125,16 @@ object ShopGUI {
                     clone,count,product.getLimit(data, shop),product.limitMax
                 ), "yushopcount", count.toString())
             guiSession.inventory.setItem(shop.shopSlot[index], itemStack)
+        }
+    }
+    private fun setBuyButton(viewConfiguration: ViewConfiguration,guiSession: GuiSession) {
+        val button = viewConfiguration.button["确定购买"]?: return
+        val itemStack = button.itemStack.clone()
+        val itemMeta = itemStack.itemMeta ?: return
+        itemMeta.setDisplayName(itemMeta.displayName.replace("%count%", count.toString()))
+        itemStack.itemMeta = itemMeta
+        button.slot.forEach {
+            guiSession.inventory.setItem(it, itemStack)
         }
     }
 

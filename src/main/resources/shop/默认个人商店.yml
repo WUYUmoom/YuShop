@@ -35,3 +35,44 @@ Button:
     price_probability: 50
     #出现权重
     weight: 10
+  购买加1:
+    name: "购买加1"
+    id: "PAPER"
+    slot: 54
+    lore:
+    #不用管
+    load: true
+  购买加10:
+    name: "购买加1"
+    id: "PAPER"
+    slot: 53
+    lore:
+    #不用管
+    load: true
+  购买减10:
+    name: "购买加1"
+    id: "PAPER"
+    slot: 52
+    lore:
+    #不用管
+    load: true
+  购买减1:
+    name: "购买加1"
+    id: "PAPER"
+    slot: 51
+    lore:
+    #不用管
+    load: true
+  购买全部:
+    name: "购买全部"
+    id: "PAPER"
+    slot: 49
+    lore:
+    load: true
+  确定购买:
+    name: "%count%"
+    id: "PAPER"
+    slot: 50
+    lore:
+    #不用管
+    load: false

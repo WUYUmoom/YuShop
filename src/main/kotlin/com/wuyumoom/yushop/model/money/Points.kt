@@ -1,6 +1,7 @@
 package com.wuyumoom.yushop.model.money
 
 import com.wuyumoom.yushop.api.money.IMoney
+import com.wuyumoom.yushop.model.Product
 import org.black_ixx.playerpoints.PlayerPoints
 import org.bukkit.entity.Player
 
@@ -16,5 +17,13 @@ class Points: IMoney {
     override fun hasEnough(player: Player, count: Int,executeCount: Int): Boolean {
         val look = PlayerPoints.getInstance().api.look(player.uniqueId)
         return look >= (count*executeCount)
+    }
+
+    override fun getCanBuyCount(
+        player: Player,
+        count: Int
+    ): Int {
+        val look = PlayerPoints.getInstance().api.look(player.uniqueId)
+        return look / count
     }
 }

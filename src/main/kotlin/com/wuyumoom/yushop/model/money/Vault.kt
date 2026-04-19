@@ -2,6 +2,7 @@ package com.wuyumoom.yushop.model.money
 
 import com.wuyumoom.yushop.YuShop
 import com.wuyumoom.yushop.api.money.IMoney
+import com.wuyumoom.yushop.model.Product
 import org.bukkit.entity.Player
 
 class Vault: IMoney {
@@ -16,5 +17,13 @@ class Vault: IMoney {
     override fun hasEnough(player: Player, count: Int,executeCount: Int): Boolean {
         val balance = YuShop.economy.getBalance(player)
         return balance >= (count*executeCount)
+    }
+
+    override fun getCanBuyCount(
+        player: Player,
+        count: Int
+    ): Int {
+        val balance = YuShop.economy.getBalance(player)
+        return (balance / count).toInt()
     }
 }

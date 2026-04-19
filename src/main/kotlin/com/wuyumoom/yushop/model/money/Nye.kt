@@ -2,6 +2,7 @@ package com.wuyumoom.yushop.model.money
 
 import com.mc9y.nyeconomy.api.NyEconomyAPI
 import com.wuyumoom.yushop.api.money.IMoney
+import com.wuyumoom.yushop.model.Product
 import org.bukkit.entity.Player
 
 class Nye(val nye: String): IMoney {
@@ -19,5 +20,14 @@ class Nye(val nye: String): IMoney {
         val checkedType = NyEconomyAPI.getInstance().checkVaultType(nye)
         val balance = NyEconomyAPI.getInstance().getBalance(checkedType, player.name)
         return balance >= (count*executeCount)
+    }
+
+    override fun getCanBuyCount(
+        player: Player,
+        count: Int
+    ): Int {
+        val checkedType = NyEconomyAPI.getInstance().checkVaultType(nye)
+        val balance = NyEconomyAPI.getInstance().getBalance(checkedType, player.name)
+        return balance / count
     }
 }

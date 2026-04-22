@@ -26,7 +26,7 @@ object DailyReset {
         val now = LocalDateTime.now()
         val nextReset = getNextResetTime(now)
         val delayInSeconds = Duration.between(now, nextReset).seconds
-        val delayInTicks = delayInSeconds * 20
+        val delayInTicks = maxOf(delayInSeconds * 20, 1L)
 
         Bukkit.getConsoleSender().sendMessage("§e[YuShop] §7下次重置时间: $nextReset (延迟: ${delayInSeconds}秒)")
 

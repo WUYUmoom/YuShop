@@ -17,7 +17,6 @@ Button:
     #购买后执行的指令
     command:
       - "say 玩家购买测试商品"
-    item:
     limit:
       #Personal为个人限购 Server 全服限购
       type: "Personal"
@@ -38,28 +37,28 @@ Button:
   购买加1:
     name: "购买加1"
     id: "PAPER"
-    slot: 54
-    lore:
-    #不用管
-    load: true
-  购买加10:
-    name: "购买加1"
-    id: "PAPER"
     slot: 53
     lore:
     #不用管
     load: true
-  购买减10:
-    name: "购买加1"
+  购买加10:
+    name: "购买加10"
     id: "PAPER"
     slot: 52
     lore:
     #不用管
     load: true
-  购买减1:
-    name: "购买加1"
+  购买减10:
+    name: "购买减10"
     id: "PAPER"
     slot: 51
+    lore:
+    #不用管
+    load: true
+  购买减1:
+    name: "购买减1"
+    id: "PAPER"
+    slot: 50
     lore:
     #不用管
     load: true
@@ -72,7 +71,7 @@ Button:
   确定购买:
     name: "%count%"
     id: "PAPER"
-    slot: 50
+    slot: 48
     lore:
     #不用管
     load: false

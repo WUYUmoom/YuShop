@@ -19,3 +19,5 @@ Message:
   no_enough: "&b您的余额不足!"
   no_limit: "&b购买或兑换次数上线"
   no_item: "&b没有此物品"
+  sell: "%player% &f当前出售 &b%count% 个 %item% 获得 %all_price% 金币"
+  buy: "%player% &f购买了 &b%count% 个 %item%"

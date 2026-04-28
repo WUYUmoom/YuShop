@@ -1,5 +1,6 @@
 package com.wuyumoom.yushop.api.type
 
+import com.wuyumoom.yucore.api.BukkitAPI
 import com.wuyumoom.yushop.api.data.DataManager
 import com.wuyumoom.yushop.config.ConfigManager
 import com.wuyumoom.yushop.model.Product
@@ -21,7 +22,7 @@ enum class ShopType {
             val data = DataManager.getData(player.name)
             // 判断次数
             val limit = product.getLimit(data, shop)
-            if (limit +executeCount > product.limitMax){
+            if (limit + executeCount > product.limitMax){
                 ConfigManager.message.sendMessage("no_limit",player)
                 return
             }
@@ -32,12 +33,17 @@ enum class ShopType {
                 }
             }
             product.limit.updateProduct(data,product.name,shop,executeCount)
+            val buy = ConfigManager.message.message["buy"]!!
+                .replace("%player%",player.name)
+                .replace("%count%",executeCount.toString())
+                .replace("%item%",product.name)
+            BukkitAPI.sendMessage(buy, player)
         }
     },
     SELL {
 
         override fun execute(product: Product,player: Player, count: Int,shop: Shop,executeCount: Int) {
-            if (hasItemInInventory(player, product.item) >= executeCount) {
+            if (hasItemInInventory(player, product.item) < executeCount) {
                 ConfigManager.message.sendMessage("no_item",player)
                 return
             }
@@ -51,6 +57,12 @@ enum class ShopType {
             product.currency.give(player,(count*executeCount))
             product.limit.updateProduct(data,product.name,shop,executeCount)
             removeItemFromInventory(player, product.item,executeCount)
+            val sell = ConfigManager.message.message["sell"]!!
+                .replace("%player%",player.name)
+                .replace("%count%",executeCount.toString())
+                .replace("%all_price%",(count*executeCount).toString())
+                .replace("%item%",product.name)
+            BukkitAPI.sendMessage(sell, player)
         }
     };
 

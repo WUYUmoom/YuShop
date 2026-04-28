@@ -73,7 +73,7 @@ fun hasItemInInventory(player: Player, targetItem: ItemStack, requiredAmount: In
     var totalCount = 0
 
     for (item in player.inventory.contents) {
-        if (item != null && item.isSimilar(targetItem)) {
+        if (item != null && item.type == targetItem.type) {
             totalCount += item.amount
         }
     }

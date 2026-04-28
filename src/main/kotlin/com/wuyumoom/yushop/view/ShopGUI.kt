@@ -43,6 +43,7 @@ class ShopGUI() {
                     "购买加1"->{
                         count++
                         setBuyButton(viewConfiguration,guiSession)
+                        draw(player,shop,viewConfiguration,guiSession)
                     }
                     "购买减1"->{
                         if (count <= 1){
@@ -70,6 +71,7 @@ class ShopGUI() {
                             return@onClick
                         }
                         shop.shopType.execute(currentProduct,player, price,shop,count)
+                        draw(player,shop,viewConfiguration,guiSession)
                     }
                     "购买全部"->{
                         if (shop.shopType == ShopType.BUY){
@@ -80,7 +82,7 @@ class ShopGUI() {
                             val data = DataManager.getData(player.name)
                             val limit = currentProduct.getLimit(data, shop)
                             count = currentProduct.currency.getCanBuyCount(player,price)
-                            if (count > limit){
+                            if (count >= limit){
                                 count = limit
                             }
                             setBuyButton(viewConfiguration,guiSession)
@@ -93,7 +95,7 @@ class ShopGUI() {
                             val data = DataManager.getData(player.name)
                             val limit = currentProduct.getLimit(data, shop)
                             val hasItemInInventory = hasItemInInventory(player, currentProduct.item, count)
-                            count = if (hasItemInInventory < limit){
+                            count = if (hasItemInInventory <= limit){
                                 hasItemInInventory
                             }else{
                                 limit

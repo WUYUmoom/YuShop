@@ -1,16 +1,12 @@
 package com.wuyumoom.yushop.model
 
 import com.wuyumoom.yucore.api.BukkitAPI
-import com.wuyumoom.yucore.api.NMS
-import com.wuyumoom.yushop.YuShop
-import com.wuyumoom.yushop.api.type.ShopLimit
 import com.wuyumoom.yushop.api.data.PlayerData
 import com.wuyumoom.yushop.api.money.IMoney
+import com.wuyumoom.yushop.api.type.ShopLimit
 import com.wuyumoom.yushop.model.money.Nye
 import com.wuyumoom.yushop.model.money.Points
 import com.wuyumoom.yushop.model.money.Vault
-import net.minecraft.nbt.TagParser
-import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.inventory.ItemStack
@@ -91,26 +87,13 @@ class Product(
             val priceProbability = configurationSection.getInt("price_probability")
             val weight = configurationSection.getInt("weight")
             val money = getMoney(configurationSection)
-            val item: ItemStack
-            val string = configurationSection.getString("item")
-            if (string == null || string.isEmpty()) {
-                item = ItemStack(Material.STONE)
-            } else {
-                val nbt = TagParser.parseTag(string)
-                val parse = net.minecraft.world.item.ItemStack.parse(YuShop.reg, nbt)
-                    .orElse(net.minecraft.world.item.ItemStack.EMPTY)
-                if (parse.isEmpty) {
-                    Bukkit.getConsoleSender().sendMessage("商品 $name 的物品解析失败")
-                }
-                item = NMS.getMNSFaItemStack(parse)
-            }
             return Product(
                 name,
                 itemName,
                 command,
                 shopLimit,
                 limitMax,
-                item,
+                ItemStack(Material.getMaterial(configurationSection.getString("id") ?: "STONE")!!),
                 minPrice,
                 maxPrice,
                 money,

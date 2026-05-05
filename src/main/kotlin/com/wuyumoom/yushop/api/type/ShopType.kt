@@ -36,7 +36,7 @@ enum class ShopType {
             val buy = ConfigManager.message.message["buy"]!!
                 .replace("%player%",player.name)
                 .replace("%count%",executeCount.toString())
-                .replace("%item%",product.name)
+                .replace("%item%",product.itemName)
             BukkitAPI.sendMessage(buy, player)
         }
     },
@@ -61,7 +61,7 @@ enum class ShopType {
                 .replace("%player%",player.name)
                 .replace("%count%",executeCount.toString())
                 .replace("%all_price%",(count*executeCount).toString())
-                .replace("%item%",product.name)
+                .replace("%item%",product.itemName)
             BukkitAPI.sendMessage(sell, player)
         }
     };

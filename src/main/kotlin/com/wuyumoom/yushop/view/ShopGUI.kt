@@ -33,8 +33,9 @@ class ShopGUI() {
             val product = shop.product[nbt]
             if (product != null) {
                 this.product = product
-                setBuyButton(viewConfiguration,guiSession)
                 price  = ItemStackAPI.getNBT(item, "yushopcount")?.toInt() ?: return@onClick
+                count = 1
+                setBuyButton(viewConfiguration,guiSession)
 //                shop.shopType.execute(product,player, count,shop)
 //                draw(player,shop,viewConfiguration,guiSession)
                 //BuyGUI(shop,product,count).open(player)

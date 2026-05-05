@@ -78,7 +78,7 @@ class Product(
          */
         fun create(configurationSection: ConfigurationSection): Product {
             val name = configurationSection.name
-            val itemName = BukkitAPI.onReplace(configurationSection.getString("name") ?: name)
+            val itemName = BukkitAPI.onReplace(configurationSection.getString("name") ?: "未知")
             val command = configurationSection.getStringList("command")
             val shopLimit = ShopLimit.valueOf(configurationSection.getString("limit.type") ?: "Personal")
             val limitMax = configurationSection.getInt("limit.max")

@@ -1,73 +1,104 @@
 package com.wuyumoom.yushop.api.type
 
 import com.wuyumoom.yucore.api.BukkitAPI
+import com.wuyumoom.yucore.view.GuiSession
 import com.wuyumoom.yushop.api.data.DataManager
 import com.wuyumoom.yushop.config.ConfigManager
 import com.wuyumoom.yushop.model.Product
 import com.wuyumoom.yushop.model.Shop
 import com.wuyumoom.yushop.util.hasItemInInventory
 import com.wuyumoom.yushop.util.removeItemFromInventory
+import com.wuyumoom.yushop.view.ConfirmGUI
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
+import org.bukkit.inventory.ItemStack
 
 enum class ShopType {
     BUY {
-
-        override fun execute(product: Product,player: Player, count: Int,shop: Shop,executeCount: Int) {
+        override fun open(shop: Shop, product: Product, count: Int, player: Player,item:ItemStack,gui:GuiSession) {
+            ConfirmGUI(shop, product, count,item,gui).open(player, ConfigManager.buy, ConfigManager.buyCount,ConfigManager.buyProduct)
+        }
+        override fun execute(
+                product: Product,
+                player: Player,
+                count: Int,
+                shop: Shop,
+                executeCount: Int
+        ) {
             // 判断经济
-            if (!product.currency.hasEnough(player,count,executeCount)){
-                ConfigManager.message.sendMessage("no_enough",player)
+            if (!product.currency.hasEnough(player, count, executeCount)) {
+                ConfigManager.message.sendMessage("no_enough", player)
                 return
             }
             val data = DataManager.getData(player.name)
             // 判断次数
             val limit = product.getLimit(data, shop)
-            if (limit + executeCount > product.limitMax){
-                ConfigManager.message.sendMessage("no_limit",player)
+            if (limit + executeCount > product.limitMax) {
+                ConfigManager.message.sendMessage("no_limit", player)
                 return
             }
-            for (i in 0 until executeCount){
-                product.currency.take(player,count)
+            for (i in 0 until executeCount) {
+                product.currency.take(player, count)
                 product.command.forEach {
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(),it.replace("%player%",player.name))
+                    Bukkit.dispatchCommand(
+                            Bukkit.getConsoleSender(),
+                            it.replace("%player%", player.name)
+                    )
                 }
             }
-            product.limit.updateProduct(data,product.name,shop,executeCount)
-            val buy = ConfigManager.message.message["buy"]!!
-                .replace("%player%",player.name)
-                .replace("%count%",executeCount.toString())
-                .replace("%item%",product.itemName)
+            product.limit.updateProduct(data, product.name, shop, executeCount)
+            val buy =
+                    ConfigManager.message.message["buy"]!!
+                            .replace("%player%", player.name)
+                            .replace("%count%", executeCount.toString())
+                            .replace("%item%", product.itemName)
             BukkitAPI.sendMessage(buy, player)
         }
     },
     SELL {
-
-        override fun execute(product: Product,player: Player, count: Int,shop: Shop,executeCount: Int) {
+        override fun open(shop: Shop, product: Product, count: Int, player: Player,item:ItemStack,gui:GuiSession) {
+            ConfirmGUI(shop, product, count,item,gui).open(player,ConfigManager.buy,ConfigManager.buyCount,ConfigManager.sellProduct)
+        }
+        override fun execute(
+                product: Product,
+                player: Player,
+                count: Int,
+                shop: Shop,
+                executeCount: Int
+        ) {
             if (hasItemInInventory(player, product.item) < executeCount) {
-                ConfigManager.message.sendMessage("no_item",player)
+                ConfigManager.message.sendMessage("no_item", player)
                 return
             }
             val data = DataManager.getData(player.name)
             // 判断次数
             val limit = product.getLimit(data, shop)
-            if (limit + executeCount > product.limitMax){
-                ConfigManager.message.sendMessage("no_limit",player)
+            if (limit + executeCount > product.limitMax) {
+                ConfigManager.message.sendMessage("no_limit", player)
                 return
             }
-            product.currency.give(player,(count*executeCount))
-            product.limit.updateProduct(data,product.name,shop,executeCount)
-            removeItemFromInventory(player, product.item,executeCount)
-            val sell = ConfigManager.message.message["sell"]!!
-                .replace("%player%",player.name)
-                .replace("%count%",executeCount.toString())
-                .replace("%all_price%",(count*executeCount).toString())
-                .replace("%item%",product.itemName)
+            product.currency.give(player, (count * executeCount))
+            product.limit.updateProduct(data, product.name, shop, executeCount)
+            removeItemFromInventory(player, product.item, executeCount)
+            val sell =
+                    ConfigManager.message.message["sell"]!!
+                            .replace("%player%", player.name)
+                            .replace("%count%", executeCount.toString())
+                            .replace("%all_price%", (count * executeCount).toString())
+                            .replace("%item%", product.itemName)
             BukkitAPI.sendMessage(sell, player)
         }
     };
 
-    /**
-     * 购买全部
-     */
-    abstract fun execute(product: Product,player: Player, count: Int,shop: Shop,executeCount: Int= 1)
+    /** 购买全部 */
+    abstract fun execute(
+            product: Product,
+            player: Player,
+            count: Int,
+            shop: Shop,
+            executeCount: Int = 1
+    )
+    // 打开确认购买界面
+    abstract fun open(shop: Shop, product: Product, count: Int, player: Player,item:ItemStack,gui:GuiSession)
 }
+

@@ -19,17 +19,6 @@ object Command: TabExecutor {
     ): Boolean {
         if (sender is Player){
             if (args.isNotEmpty()){
-                if (args[0]=="item"){
-                    val itemInMainHand = sender.inventory.itemInMainHand
-                    if (itemInMainHand.type == org.bukkit.Material.AIR){
-                        sender.sendMessage("请将物品放入主手")
-                        return true
-                    }
-                    val mnsItemStack = NMS.getMNSItemStack(itemInMainHand)
-                    val save = mnsItemStack.save(YuShop.reg)
-                    Bukkit.getConsoleSender().sendMessage("物品nbt:$save")
-                    return true
-                }
                 if (args[0]=="reload"){
                     if (!sender.hasPermission("yushop.reload")){
                         return true
@@ -39,7 +28,8 @@ object Command: TabExecutor {
                     return true
                 }
                 val configuration = ConfigManager.viewConfigurationMap[args[0]]?:return true
-                ShopGUI().open(configuration,sender, ConfigManager.shop[args[0]]!!)
+                ShopGUI.open(configuration,sender, ConfigManager.shop[args[0]]!!)
+				return true
             }else{
                 return true
             }
@@ -62,7 +52,6 @@ object Command: TabExecutor {
                 val suggestions = mutableListOf<String>()
 
                 // 添加子命令
-                suggestions.add("item")
                 suggestions.add("reload")
 
                 // 添加所有商店名称

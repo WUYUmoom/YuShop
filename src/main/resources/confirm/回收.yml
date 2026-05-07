@@ -1,4 +1,4 @@
-title: "&8购买界面"
+title: "&8回收界面"
 size: 54
 #商品位置
 product: 1
@@ -8,7 +8,7 @@ Button:
     id: "PAPER"
     slot: 10
     lore:
-      - "&7点击购买1个"
+      - "&7点击回收1个"
       - "&7价格: &a%price%"
       - "&7限购: &a%limit_max%/%limit_count%"
       - "&e点击购买测试商品"

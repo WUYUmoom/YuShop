@@ -18,6 +18,12 @@ Button:
     #不用管
     load: false
     count: 1
+  确认购买:
+    name: "&b确认购买"
+    slot: 13
+    lore:
+      - "&b确认购买"
+    load: true
   返回:
     name: "&b返回"
     slot: 12

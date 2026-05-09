@@ -4,7 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "2.2.0"
 }
 group = "com.wuyumoom"
-version = "1.2.13-SNAPSHOT"
+version = "1.2.16-SNAPSHOT"
 
 loom {
     splitEnvironmentSourceSets()

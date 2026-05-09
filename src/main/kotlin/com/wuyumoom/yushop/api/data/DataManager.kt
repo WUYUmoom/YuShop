@@ -11,6 +11,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.ConcurrentHashMap
 import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.Bukkit
 
 enum class StorageType {
     YML {
@@ -128,6 +129,10 @@ object DataManager {
     fun upDateLimit() {
         storageType.upServerLimit()
     }
+	//删除玩家数据缓存
+	fun remove(player:String){
+		cache.remove(player)
+	}
 }
 
 data class PlayerData(

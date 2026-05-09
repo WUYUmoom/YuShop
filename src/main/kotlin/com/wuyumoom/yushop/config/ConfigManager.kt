@@ -82,7 +82,6 @@ object ConfigManager {
         } else {
             DatabaseManager.connect()
             if (DatabaseManager.isConnected()) {
-                Bukkit.getPluginManager().registerEvents(PluginEvent(), YuShop.INSTANCE)
                 YuShop.INSTANCE.server.logger.info("§a数据库连接成功")
             }
         }

@@ -10,6 +10,7 @@ class PluginEvent: Listener {
     @EventHandler
     fun onPlayerQuit(event: PlayerQuitEvent){
         DataManager.saveData(event.player.name)
+		DataManager.remove(event.player.name)
     }
 
 }

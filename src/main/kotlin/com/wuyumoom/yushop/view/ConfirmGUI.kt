@@ -9,13 +9,14 @@ import com.wuyumoom.yushop.model.Product
 import com.wuyumoom.yushop.model.Shop
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
+import org.bukkit.Bukkit
 
 class ConfirmGUI(
         val shop: Shop,
         val product: Product,
         val count: Int,
         val item: ItemStack,
-        val gui: ViewConfiguration
+        val gui: ViewConfiguration,
 ) {
     /** 打开购买界面 */
     fun open(
@@ -32,7 +33,7 @@ class ConfirmGUI(
                 ShopGUI.open(gui, player, shop)
                 return@onClick
             }
-            val i = ConfigManager.buyCount[nbt]
+            val i = buyCount[nbt]
             if (i != null) {
                 shop.shopType.execute(product, player, count * i, shop)
                 draw(guiSession, player, view, buyCount)

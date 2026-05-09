@@ -28,7 +28,7 @@ object ShopGUI {
             if (product != null) {
                 val count = ItemStackAPI.getNBT(item, "yushopcount")?.toInt() ?: return@onClick
                 //ConfirmGUI(shop,product,count).open(player)
-				shop.shopType.open(shop,product,count,player,item,guiSession)
+				shop.shopType.open(shop,product,count,player,item,viewConfiguration)
             }
         }
         draw(player,shop,viewConfiguration,guiSession)

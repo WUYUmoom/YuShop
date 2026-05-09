@@ -1,36 +1,39 @@
 package com.wuyumoom.yushop.cmd
 
-import com.wuyumoom.yucore.api.NMS
-import com.wuyumoom.yushop.YuShop
 import com.wuyumoom.yushop.config.ConfigManager
+import com.wuyumoom.yushop.api.data.DataManager
 import com.wuyumoom.yushop.view.ShopGUI
-import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabExecutor
 import org.bukkit.entity.Player
 
-object Command: TabExecutor {
+object Command : TabExecutor {
     override fun onCommand(
-        sender: CommandSender,
-        command: Command,
-        label: String,
-        args: Array<String>
+            sender: CommandSender,
+            command: Command,
+            label: String,
+            args: Array<String>
     ): Boolean {
-        if (sender is Player){
-            if (args.isNotEmpty()){
-                if (args[0]=="reload"){
-                    if (!sender.hasPermission("yushop.reload")){
+        if (sender is Player) {
+            if (args.isNotEmpty()) {
+                if (args[0] == "test") {
+                    DataManager.upDateLimit()
+					sender.sendMessage("重置完成")
+                    return true
+                }
+                if (args[0] == "reload") {
+                    if (!sender.hasPermission("yushop.reload")) {
                         return true
                     }
                     ConfigManager.reload()
                     sender.sendMessage("§a重载成功")
                     return true
                 }
-                val configuration = ConfigManager.viewConfigurationMap[args[0]]?:return true
-                ShopGUI.open(configuration,sender, ConfigManager.shop[args[0]]!!)
-				return true
-            }else{
+                val configuration = ConfigManager.viewConfigurationMap[args[0]] ?: return true
+                ShopGUI.open(configuration, sender, ConfigManager.shop[args[0]]!!)
+                return true
+            } else {
                 return true
             }
         }
@@ -38,10 +41,10 @@ object Command: TabExecutor {
     }
 
     override fun onTabComplete(
-        sender: CommandSender,
-        command: Command,
-        label: String,
-        args: Array<String>
+            sender: CommandSender,
+            command: Command,
+            label: String,
+            args: Array<String>
     ): List<String> {
         if (args.isEmpty()) {
             return emptyList()
@@ -55,9 +58,7 @@ object Command: TabExecutor {
                 suggestions.add("reload")
 
                 // 添加所有商店名称
-                ConfigManager.shop.keys.forEach { shopName ->
-                    suggestions.add(shopName)
-                }
+                ConfigManager.shop.keys.forEach { shopName -> suggestions.add(shopName) }
 
                 // 过滤并排序
                 suggestions.filter { it.lowercase().startsWith(input) }.sorted()

@@ -2,6 +2,7 @@ package com.wuyumoom.yushop.api.type
 
 import com.wuyumoom.yucore.api.BukkitAPI
 import com.wuyumoom.yucore.view.GuiSession
+import com.wuyumoom.yucore.file.view.ViewConfiguration
 import com.wuyumoom.yushop.api.data.DataManager
 import com.wuyumoom.yushop.config.ConfigManager
 import com.wuyumoom.yushop.model.Product
@@ -15,8 +16,8 @@ import org.bukkit.inventory.ItemStack
 
 enum class ShopType {
     BUY {
-        override fun open(shop: Shop, product: Product, count: Int, player: Player,item:ItemStack,gui:GuiSession) {
-            ConfirmGUI(shop, product, count,item,gui).open(player, ConfigManager.buy, ConfigManager.buyCount,ConfigManager.buyProduct)
+        override fun open(shop: Shop, product: Product, count: Int, player: Player,item:ItemStack,viewConfiguration: ViewConfiguration) {
+            ConfirmGUI(shop, product, count,item,viewConfiguration).open(player, ConfigManager.buy, ConfigManager.buyCount)
         }
         override fun execute(
                 product: Product,
@@ -56,8 +57,8 @@ enum class ShopType {
         }
     },
     SELL {
-        override fun open(shop: Shop, product: Product, count: Int, player: Player,item:ItemStack,gui:GuiSession) {
-            ConfirmGUI(shop, product, count,item,gui).open(player,ConfigManager.buy,ConfigManager.buyCount,ConfigManager.sellProduct)
+        override fun open(shop: Shop, product: Product, count: Int, player: Player,item:ItemStack,viewConfiguration: ViewConfiguration) {
+            ConfirmGUI(shop, product, count,item,viewConfiguration).open(player,ConfigManager.sell,ConfigManager.sellCount)
         }
         override fun execute(
                 product: Product,
@@ -99,6 +100,6 @@ enum class ShopType {
             executeCount: Int = 1
     )
     // 打开确认购买界面
-    abstract fun open(shop: Shop, product: Product, count: Int, player: Player,item:ItemStack,gui:GuiSession)
+    abstract fun open(shop: Shop, product: Product, count: Int, player: Player,item:ItemStack,viewConfiguration: ViewConfiguration)
 }
 

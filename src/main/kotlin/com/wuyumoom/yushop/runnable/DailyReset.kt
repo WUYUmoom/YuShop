@@ -45,7 +45,6 @@ object DailyReset {
      */
     private fun getNextResetTime(now: LocalDateTime): LocalDateTime {
         val today2300 = now.withHour(23).withMinute(0).withSecond(0).withNano(0)
-
         return if (now.isBefore(today2300)) {
             today2300
         } else {

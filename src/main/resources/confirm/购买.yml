@@ -1,8 +1,11 @@
 title: "&8购买界面"
 size: 54
-#商品位置
-product: 1
 Button:
+  商品:
+    name: "%name%"
+    slot: 1
+    lore:
+      - "&b点击购买"
   购买1:
     name: "&6%name%"
     id: "PAPER"

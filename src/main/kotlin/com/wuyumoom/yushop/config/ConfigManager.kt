@@ -19,11 +19,9 @@ object ConfigManager {
     val viewConfigurationMap: MutableMap<String, ViewConfiguration> = HashMap()
     lateinit var buy: ViewConfiguration
     var buyCount: MutableMap<String, Int> = mutableMapOf()
-    var buyProduct: Int = 1
 
     lateinit var sell: ViewConfiguration
     var sellCount: MutableMap<String, Int> = mutableMapOf()
-    var sellProduct: Int = 1
 
     var dataFile: File = File(YuShop.pluginFile, "data")
     var storage_mode: StorageType = StorageType.YML
@@ -45,7 +43,6 @@ object ConfigManager {
         FileAPI.folderFiles(YuShop.INSTANCE, "confirm", YuShop.pluginFile).forEach { file ->
             if (file.name.contains("购买")) {
                 val loadConfiguration = YamlConfiguration.loadConfiguration(file)
-				buyProduct = loadConfiguration.getInt("product")
                 buy = ViewConfiguration(loadConfiguration)
                 loadConfiguration.getConfigurationSection("Button")!!.getKeys(false).forEach {
                     val int = loadConfiguration.getInt("Button.${it}.count")
@@ -56,7 +53,6 @@ object ConfigManager {
             }
             if (file.name.contains("回收")) {
                 val loadConfiguration = YamlConfiguration.loadConfiguration(file)
-				sellProduct  = loadConfiguration.getInt("product")
                 sell = ViewConfiguration(loadConfiguration)
                 loadConfiguration.getConfigurationSection("Button")!!.getKeys(false).forEach {
                     val int = loadConfiguration.getInt("Button.${it}.count")

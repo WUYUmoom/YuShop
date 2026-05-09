@@ -1,5 +1,5 @@
 name: YuShop
-version: '1.2.9'
+version: '1.2.13'
 main: com.wuyumoom.yushop.YuShop
 api-version: '1.21'
 depend: [ YuCore ]

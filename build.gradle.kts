@@ -4,11 +4,10 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "2.2.0"
 }
 group = "com.wuyumoom"
-version = "1.2.16-SNAPSHOT"
+version = "1.2.20-SNAPSHOT"
 
 loom {
     splitEnvironmentSourceSets()
-
 }
 repositories {
     mavenLocal()
@@ -48,7 +47,7 @@ dependencies {
     mappings(loom.officialMojangMappings())
     //mappings "net.fabricmc:yarn:1.21.1+build.3:v2"
 
-    modCompileOnly("wuyumoom:yucore:1.6.6:YuCore@jar")
+    modCompileOnly("wuyumoom:yucore:1.6.13:YuCore@jar")
     /*<-cobblemon->*/
 
     /*<-spigot->*/
@@ -72,9 +71,6 @@ tasks.named<ProcessResources>("processResources") {
             "author" to "WUYUmoom"
         )
     }
-}
-tasks.named<Test>("test") {
-    useJUnitPlatform()
 }
 kotlin {
     jvmToolchain(21)

@@ -34,13 +34,13 @@ object DatabaseManager {
         if (!createDatabase()) {
             YuShop.INSTANCE.server.logger.warning("无法创建数据库 $databaseName。")
         }
+        if (!connect()) {
+            YuShop.INSTANCE.server.logger.warning("无法连接到数据库！")
+        }
         if (createTables()) {
             YuShop.INSTANCE.server.logger.info("§a数据库表创建/检测成功")
         } else {
-            YuShop.INSTANCE.server.logger.warning("无法创建数据库表。")
-        }
-        if (!connect()) {
-            YuShop.INSTANCE.server.logger.warning("无法连接到数据库！")
+            YuShop.INSTANCE.server.logger.severe("无法创建数据库表，插件可能无法正常工作！")
         }
     }
 
@@ -48,65 +48,62 @@ object DatabaseManager {
      * 创建表
      */
     private fun createTables(): Boolean {
+        val conn = ensureConnection() ?: return false
         return try {
-            DriverManager.getConnection(url, username, password).use { conn ->
-                conn.createStatement().use { stmt ->
-                    stmt.executeUpdate("""
-                        CREATE TABLE IF NOT EXISTS `yushop_player_data` (
-                            `id` INT AUTO_INCREMENT PRIMARY KEY,
-                            `player_name` VARCHAR(36) NOT NULL UNIQUE,
-                            `last_update_time` VARCHAR(30) NOT NULL DEFAULT '2021-01-01 00:00:00',
-                            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                            `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                            INDEX `idx_player_name` (`player_name`)
-                        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-                    """.trimIndent())
+            conn.createStatement().use { stmt ->
+                stmt.executeUpdate("""
+                    CREATE TABLE IF NOT EXISTS `yushop_player_data` (
+                        `id` INT AUTO_INCREMENT PRIMARY KEY,
+                        `player_name` VARCHAR(36) NOT NULL UNIQUE,
+                        `last_update_time` VARCHAR(30) NOT NULL DEFAULT '2021-01-01 00:00:00',
+                        `created_at` TIMESTAMP DEFAULT '2021-01-01 00:00:01',
+                        `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                        INDEX `idx_player_name` (`player_name`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                """.trimIndent())
 
-                    stmt.executeUpdate("""
-                        CREATE TABLE IF NOT EXISTS `yushop_shop_data` (
-                            `id` INT AUTO_INCREMENT PRIMARY KEY,
-                            `player_name` VARCHAR(36) NOT NULL,
-                            `shop_name` VARCHAR(50) NOT NULL,
-                            `product_name` VARCHAR(50) NOT NULL,
-                            `price` INT NOT NULL DEFAULT 0,
-                            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                            `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                            UNIQUE KEY `unique_player_shop_product` (`player_name`, `shop_name`, `product_name`),
-                            INDEX `idx_player_name` (`player_name`),
-                            INDEX `idx_shop_name` (`shop_name`),
-                            FOREIGN KEY (`player_name`) REFERENCES `yushop_player_data`(`player_name`) ON DELETE CASCADE
-                        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-                    """.trimIndent())
+                stmt.executeUpdate("""
+                    CREATE TABLE IF NOT EXISTS `yushop_shop_data` (
+                        `id` INT AUTO_INCREMENT PRIMARY KEY,
+                        `player_name` VARCHAR(36) NOT NULL,
+                        `shop_name` VARCHAR(50) NOT NULL,
+                        `product_name` VARCHAR(50) NOT NULL,
+                        `price` INT NOT NULL DEFAULT 0,
+                        `created_at` TIMESTAMP DEFAULT '2021-01-01 00:00:01',
+                        `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                        UNIQUE KEY `unique_player_shop_product` (`player_name`, `shop_name`, `product_name`),
+                        INDEX `idx_player_name` (`player_name`),
+                        INDEX `idx_shop_name` (`shop_name`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                """.trimIndent())
 
-                    stmt.executeUpdate("""
-                        CREATE TABLE IF NOT EXISTS `yushop_limit_data` (
-                            `id` INT AUTO_INCREMENT PRIMARY KEY,
-                            `player_name` VARCHAR(36) NOT NULL,
-                            `shop_name` VARCHAR(50) NOT NULL,
-                            `product_name` VARCHAR(50) NOT NULL,
-                            `purchase_count` INT NOT NULL DEFAULT 0,
-                            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                            `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                            UNIQUE KEY `unique_player_shop_product` (`player_name`, `shop_name`, `product_name`),
-                            INDEX `idx_player_name` (`player_name`),
-                            INDEX `idx_shop_name` (`shop_name`),
-                            FOREIGN KEY (`player_name`) REFERENCES `yushop_player_data`(`player_name`) ON DELETE CASCADE
-                        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-                    """.trimIndent())
+                stmt.executeUpdate("""
+                    CREATE TABLE IF NOT EXISTS `yushop_limit_data` (
+                        `id` INT AUTO_INCREMENT PRIMARY KEY,
+                        `player_name` VARCHAR(36) NOT NULL,
+                        `shop_name` VARCHAR(50) NOT NULL,
+                        `product_name` VARCHAR(50) NOT NULL,
+                        `purchase_count` INT NOT NULL DEFAULT 0,
+                        `created_at` TIMESTAMP DEFAULT '2021-01-01 00:00:01',
+                        `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                        UNIQUE KEY `unique_player_shop_product` (`player_name`, `shop_name`, `product_name`),
+                        INDEX `idx_player_name` (`player_name`),
+                        INDEX `idx_shop_name` (`shop_name`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                """.trimIndent())
 
-                    stmt.executeUpdate("""
-                        CREATE TABLE IF NOT EXISTS `yushop_server_limit` (
-                            `id` INT AUTO_INCREMENT PRIMARY KEY,
-                            `shop_name` VARCHAR(50) NOT NULL,
-                            `product_name` VARCHAR(50) NOT NULL,
-                            `purchase_count` INT NOT NULL DEFAULT 0,
-                            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                            `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                            UNIQUE KEY `unique_shop_product` (`shop_name`, `product_name`),
-                            INDEX `idx_shop_name` (`shop_name`)
-                        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-                    """.trimIndent())
-                }
+                stmt.executeUpdate("""
+                    CREATE TABLE IF NOT EXISTS `yushop_server_limit` (
+                        `id` INT AUTO_INCREMENT PRIMARY KEY,
+                        `shop_name` VARCHAR(50) NOT NULL,
+                        `product_name` VARCHAR(50) NOT NULL,
+                        `purchase_count` INT NOT NULL DEFAULT 0,
+                        `created_at` TIMESTAMP DEFAULT '2021-01-01 00:00:01',
+                        `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                        UNIQUE KEY `unique_shop_product` (`shop_name`, `product_name`),
+                        INDEX `idx_shop_name` (`shop_name`)
+                    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+                """.trimIndent())
             }
             true
         } catch (e: SQLException) {
@@ -285,7 +282,18 @@ object DatabaseManager {
             return
         }
 
+        val originalAutoCommit = try {
+            conn.autoCommit
+        } catch (e: SQLException) {
+            e.printStackTrace()
+            true
+        }
+
         try {
+            if (!originalAutoCommit) {
+                conn.autoCommit = false
+            }
+
             conn.prepareStatement("""
                 INSERT INTO `yushop_player_data` (`player_name`, `last_update_time`) 
                 VALUES (?, ?) 
@@ -328,9 +336,28 @@ object DatabaseManager {
                     }
                 }
             }
+
+            if (!originalAutoCommit) {
+                conn.commit()
+            }
         } catch (e: SQLException) {
             e.printStackTrace()
             YuShop.INSTANCE.server.logger.warning("保存玩家数据时发生错误: ${playerData.name}")
+            try {
+                if (!originalAutoCommit && !conn.isClosed) {
+                    conn.rollback()
+                }
+            } catch (rollbackEx: SQLException) {
+                rollbackEx.printStackTrace()
+            }
+        } finally {
+            try {
+                if (!originalAutoCommit && !conn.isClosed) {
+                    conn.autoCommit = originalAutoCommit
+                }
+            } catch (e: SQLException) {
+                e.printStackTrace()
+            }
         }
     }
 

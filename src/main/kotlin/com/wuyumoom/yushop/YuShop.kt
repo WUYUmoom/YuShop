@@ -4,6 +4,7 @@ import com.wuyumoom.yushop.api.data.DataManager
 import com.wuyumoom.yushop.api.data.StorageType
 import com.wuyumoom.yushop.cmd.Command
 import com.wuyumoom.yushop.config.ConfigManager
+import com.wuyumoom.yushop.database.DatabaseManager
 import com.wuyumoom.yushop.listener.PluginEvent
 import com.wuyumoom.yushop.runnable.DailyReset
 import com.wuyumoom.yushop.runnable.Save
@@ -17,7 +18,6 @@ import org.bukkit.plugin.java.JavaPlugin
 class YuShop : JavaPlugin() {
     companion object {
         lateinit var reg: RegistryAccess
-        lateinit var economy: Economy
         lateinit var pluginFile: File
         lateinit var INSTANCE: YuShop
         val LOGO =
@@ -45,27 +45,12 @@ class YuShop : JavaPlugin() {
             it.setExecutor(Command)
             it.tabCompleter = Command
         }
-        if (!setupEconomy()) {
-            Bukkit.getConsoleSender().sendMessage("没有找到 Vault 经济系统")
-        }
         if (ConfigManager.storage_mode == StorageType.YML) {
             Save.runTaskTimer(this, 20L, 20L)
         }
         Bukkit.getPluginManager().registerEvents(PluginEvent(), YuShop.INSTANCE)
         DailyReset.start(this)
         Bukkit.getConsoleSender().sendMessage(*LOGO)
-    }
-
-    private fun setupEconomy(): Boolean {
-        if (server.pluginManager.getPlugin("Vault") == null) {
-            return false
-        }
-        val rsp = server.servicesManager.getRegistration<Economy?>(Economy::class.java)
-        if (rsp == null) {
-            return false
-        }
-        economy = rsp.getProvider()
-        return true
     }
 
     override fun onDisable() {

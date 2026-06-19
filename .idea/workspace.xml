@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b30487da-fc3c-4b3a-bd05-041ea5770784" name="更改" comment="兼容旧版本数据库，添加更多报错提示">
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/view/ShopGUI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/view/ShopGUI.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/shop/默认个人商店.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shop/默认个人商店.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="YuShop" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="YuShop" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="YuShop" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Enum" />
+        <option value="Kotlin Interface" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;WUYUmoom&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/WUYUmoom/YuShop.git&quot;,
+    &quot;accountId&quot;: &quot;67d1df17-dc1a-4cd6-8f30-34307693b800&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="3BF0OSHfDqGx6fQnskQqZCgOZKl" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.YuShop [buildDependents].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.YuShop [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.升级 Gradle 包装器.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/wuyumoom/我的世界/方可梦开发/YuShop&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;D:/我的世界/方可梦开发/YuShop/src/main/kotlin/Main.kt&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;http.proxy&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\我的世界\方可梦开发\YuShop\libs" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\我的世界\方可梦开发\YuShop\src\main\resources\view" />
+      <recent name="D:\我的世界\方可梦开发\YuShop\src\main\resources\shop" />
+    </key>
+    <key name="K2MoveDeclarationsDialog.RECENT_PACKAGE_KEY">
+      <recent name="com.wuyumoom.yushop.api.money" />
+      <recent name="com.wuyumoom.yushop.api.type" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.YuShop [build]">
+    <configuration name="YuShop [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="buildDependents" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="YuShop [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.YuShop [build]" />
+        <item itemvalue="Gradle.YuShop [buildDependents]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.25134.95" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.25134.95" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="b30487da-fc3c-4b3a-bd05-041ea5770784" name="更改" comment="" />
+      <created>1774069480355</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1774069480355</updated>
+      <workItem from="1774069481502" duration="937000" />
+      <workItem from="1774071122070" duration="2642000" />
+      <workItem from="1774116934689" duration="2001000" />
+      <workItem from="1774210807592" duration="1999000" />
+      <workItem from="1774240623034" duration="1143000" />
+      <workItem from="1774243577986" duration="597000" />
+      <workItem from="1774306116149" duration="1426000" />
+      <workItem from="1774396619101" duration="599000" />
+      <workItem from="1774487683683" duration="598000" />
+      <workItem from="1774590887561" duration="596000" />
+      <workItem from="1774760959714" duration="1200000" />
+      <workItem from="1774837459483" duration="599000" />
+      <workItem from="1774936366322" duration="594000" />
+      <workItem from="1774943374597" duration="411000" />
+      <workItem from="1774944293903" duration="586000" />
+      <workItem from="1775029466950" duration="594000" />
+      <workItem from="1775105968659" duration="597000" />
+      <workItem from="1775120369098" duration="484000" />
+      <workItem from="1775120870375" duration="597000" />
+      <workItem from="1775190423446" duration="584000" />
+      <workItem from="1775221670839" duration="596000" />
+      <workItem from="1775281083150" duration="595000" />
+      <workItem from="1775380329843" duration="593000" />
+      <workItem from="1775479019936" duration="599000" />
+      <workItem from="1775549656492" duration="1586000" />
+      <workItem from="1775646648375" duration="7313000" />
+      <workItem from="1775734001847" duration="18836000" />
+      <workItem from="1775904502893" duration="598000" />
+      <workItem from="1775984423125" duration="4924000" />
+      <workItem from="1776086754269" duration="13149000" />
+      <workItem from="1776119176313" duration="15045000" />
+      <workItem from="1776251934392" duration="8172000" />
+      <workItem from="1776351023939" duration="1315000" />
+      <workItem from="1776419511204" duration="9643000" />
+      <workItem from="1776557745939" duration="8063000" />
+      <workItem from="1776607408250" duration="599000" />
+      <workItem from="1776614946808" duration="599000" />
+      <workItem from="1776693296422" duration="2718000" />
+      <workItem from="1776790058786" duration="599000" />
+      <workItem from="1776796011524" duration="599000" />
+      <workItem from="1776898979768" duration="8546000" />
+      <workItem from="1777063535320" duration="599000" />
+      <workItem from="1777148002091" duration="595000" />
+      <workItem from="1777238278851" duration="993000" />
+      <workItem from="1777318595588" duration="9118000" />
+      <workItem from="1777421672716" duration="5028000" />
+      <workItem from="1777511896220" duration="596000" />
+      <workItem from="1777541069432" duration="599000" />
+      <workItem from="1777602719988" duration="8941000" />
+      <workItem from="1777770703414" duration="599000" />
+      <workItem from="1777808682454" duration="2022000" />
+      <workItem from="1777883025460" duration="595000" />
+      <workItem from="1777955138492" duration="2268000" />
+      <workItem from="1778058344510" duration="3319000" />
+      <workItem from="1778144144985" duration="597000" />
+      <workItem from="1778227898391" duration="595000" />
+      <workItem from="1778301858210" duration="6932000" />
+      <workItem from="1778401416624" duration="3294000" />
+      <workItem from="1778489060108" duration="599000" />
+      <workItem from="1778574141542" duration="1797000" />
+      <workItem from="1778654760281" duration="599000" />
+      <workItem from="1778663340163" duration="599000" />
+      <workItem from="1778751939727" duration="597000" />
+      <workItem from="1778841841599" duration="881000" />
+      <workItem from="1778953243065" duration="233000" />
+      <workItem from="1778958214096" duration="502000" />
+      <workItem from="1779173213004" duration="1272000" />
+      <workItem from="1779895967299" duration="462000" />
+      <workItem from="1779896435861" duration="265000" />
+      <workItem from="1779971964465" duration="313000" />
+      <workItem from="1780043524944" duration="603000" />
+      <workItem from="1780044132600" duration="45000" />
+      <workItem from="1780044181766" duration="79000" />
+      <workItem from="1780044269876" duration="3035000" />
+      <workItem from="1780974173403" duration="1452000" />
+      <workItem from="1780989958964" duration="1288000" />
+      <workItem from="1781852441713" duration="651000" />
+    </task>
+    <task id="LOCAL-00001" summary="初始提交">
+      <option name="closed" value="true" />
+      <created>1775838771163</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1775838771163</updated>
+    </task>
+    <task id="LOCAL-00002" summary="完成1.0">
+      <option name="closed" value="true" />
+      <created>1776134446270</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1776134446270</updated>
+    </task>
+    <task id="LOCAL-00003" summary="添加购买界面">
+      <option name="closed" value="true" />
+      <created>1776423268666</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1776423268666</updated>
+    </task>
+    <task id="LOCAL-00004" summary="添加修改购买界面">
+      <option name="closed" value="true" />
+      <created>1776565474889</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1776565474889</updated>
+    </task>
+    <task id="LOCAL-00005" summary="修复无限执行">
+      <option name="closed" value="true" />
+      <created>1776899139883</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1776899139883</updated>
+    </task>
+    <task id="LOCAL-00006" summary="更新提示">
+      <option name="closed" value="true" />
+      <created>1777342848944</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1777342848944</updated>
+    </task>
+    <task id="LOCAL-00007" summary="2026/5/5">
+      <option name="closed" value="true" />
+      <created>1777965233122</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1777965233122</updated>
+    </task>
+    <task id="LOCAL-00008" summary="兼容旧版本数据库，添加更多报错提示">
+      <option name="closed" value="true" />
+      <created>1780047554088</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1780047554088</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="初始提交" />
+    <MESSAGE value="完成1.0" />
+    <MESSAGE value="添加购买界面" />
+    <MESSAGE value="添加修改购买界面" />
+    <MESSAGE value="修复无限执行" />
+    <MESSAGE value="更新提示" />
+    <MESSAGE value="2026/5/5" />
+    <MESSAGE value="兼容旧版本数据库，添加更多报错提示" />
+    <option name="LAST_COMMIT_MESSAGE" value="兼容旧版本数据库，添加更多报错提示" />
+  </component>
+</project>

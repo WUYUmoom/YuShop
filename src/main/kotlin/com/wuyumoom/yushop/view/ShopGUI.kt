@@ -34,23 +34,28 @@ object ShopGUI {
         draw(player,shop,viewConfiguration,guiSession)
         guiSession.open()
     }
-    fun draw(player: Player,shop: Shop,viewConfiguration: ViewConfiguration,guiSession: GuiSession){
-        var index = -1
+    fun draw(player: Player, shop: Shop, viewConfiguration: ViewConfiguration, guiSession: GuiSession) {
         val data = DataManager.getData(player.name)
         val playerShopData = data.shopData[shop.name] ?: return
-        playerShopData.product.forEach { (name, count) ->
+
+        playerShopData.product.entries.forEachIndexed { index, (name, count) ->
+            // 边界检查
+            if (index >= shop.shopSlot.size) {
+                return@forEachIndexed
+            }
+
             val button = viewConfiguration.button[name]
             if (button == null) {
-                Bukkit.getConsoleSender().sendMessage("[YuShop] 界面配置错误")
-                return@forEach
+                Bukkit.getConsoleSender().sendMessage("[YuShop] 界面配置错误: 找不到按钮 '$name'")
+                return@forEachIndexed
             }
-            index++
+
             val clone = button.itemStack.clone()
-            val product = shop.product[name] ?: return@forEach
+            val product = shop.product[name] ?: return@forEachIndexed
             val itemStack = ItemStackAPI.setNBT(
-                setLore(
-                    clone,count,product.getLimit(data, shop),product.limitMax
-                ), "yushopcount", count.toString())
+                setLore(clone, count, product.getLimit(data, shop), product.limitMax),
+                "yushopcount", count.toString()
+            )
             guiSession.inventory.setItem(shop.shopSlot[index], itemStack)
         }
     }

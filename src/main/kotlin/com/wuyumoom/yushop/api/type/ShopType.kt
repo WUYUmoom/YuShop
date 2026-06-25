@@ -80,6 +80,7 @@ enum class ShopType {
             }
             product.currency.give(player, (count * executeCount))
             product.limit.updateProduct(data, product.name, shop, executeCount)
+            Bukkit.getConsoleSender().sendMessage("购买次数:${executeCount}")
             removeItemFromInventory(player, product.item, executeCount)
             val sell =
                     ConfigManager.message.message["sell"]!!
@@ -97,7 +98,7 @@ enum class ShopType {
             player: Player,
             count: Int,
             shop: Shop,
-            executeCount: Int = 1
+            executeCount: Int
     )
     // 打开确认购买界面
     abstract fun open(shop: Shop, product: Product, count: Int, player: Player,item:ItemStack,viewConfiguration: ViewConfiguration)

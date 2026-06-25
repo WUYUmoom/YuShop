@@ -81,15 +81,7 @@ fun hasItemInInventory(player: Player, targetItem: ItemStack, requiredAmount: In
     return totalCount
 }
 
-/**
- * 从玩家背包中移除指定物品和数量
- *
- * @param player 要操作的玩家
- * @param targetItem 目标物品
- * @param removeAmount 需要移除的数量
- * @return 实际移除的数量
- */
-fun removeItemFromInventory(player: Player, targetItem: ItemStack, removeAmount: Int = 1): Int {
+fun removeItemFromInventory(player: Player, targetItem: ItemStack, removeAmount: Int): Int {
     if (removeAmount <= 0) return 0
     if (targetItem.type.isAir) return 0
 
@@ -99,7 +91,7 @@ fun removeItemFromInventory(player: Player, targetItem: ItemStack, removeAmount:
         if (removedCount >= removeAmount) break
 
         val item = player.inventory.getItem(i)
-        if (item != null && item.isSimilar(targetItem)) {
+        if (item != null && item.type == targetItem.type) {
             val available = item.amount
             val toRemove = minOf(available, removeAmount - removedCount)
 

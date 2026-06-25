@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b30487da-fc3c-4b3a-bd05-041ea5770784" name="更改" comment="兼容旧版本数据库，添加更多报错提示">
+    <list default="true" id="b30487da-fc3c-4b3a-bd05-041ea5770784" name="更改" comment="修复数据组越界">
+      <change beforePath="$PROJECT_DIR$/.idea/MarsCodeWorkspaceAppSettings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/view/ShopGUI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/view/ShopGUI.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/shop/默认个人商店.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/shop/默认个人商店.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/YuShop.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/YuShop.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/api/type/ShopType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/api/type/ShopType.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/util/Util.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/util/Util.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/view/ConfirmGUI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/view/ConfirmGUI.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +76,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/WUYUmoom/YuShop.git&quot;,
-    &quot;accountId&quot;: &quot;67d1df17-dc1a-4cd6-8f30-34307693b800&quot;
+    &quot;accountId&quot;: &quot;a112bba9-da64-4733-83f5-3c6198d2ae38&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -94,8 +99,9 @@
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/wuyumoom/我的世界/方可梦开发/YuShop&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/方可梦开发/YuShop&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -272,7 +278,16 @@
       <workItem from="1780044269876" duration="3035000" />
       <workItem from="1780974173403" duration="1452000" />
       <workItem from="1780989958964" duration="1288000" />
-      <workItem from="1781852441713" duration="651000" />
+      <workItem from="1781852441713" duration="969000" />
+      <workItem from="1781864079870" duration="8000" />
+      <workItem from="1781963568783" duration="254000" />
+      <workItem from="1781964139769" duration="753000" />
+      <workItem from="1782206624494" duration="24000" />
+      <workItem from="1782220613376" duration="169000" />
+      <workItem from="1782220796127" duration="2729000" />
+      <workItem from="1782283602400" duration="1495000" />
+      <workItem from="1782286959715" duration="1799000" />
+      <workItem from="1782369205315" duration="5543000" />
     </task>
     <task id="LOCAL-00001" summary="初始提交">
       <option name="closed" value="true" />
@@ -338,7 +353,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780047554088</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="修复数据组越界">
+      <option name="closed" value="true" />
+      <created>1781853404050</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1781853404050</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -353,6 +376,7 @@
     <MESSAGE value="更新提示" />
     <MESSAGE value="2026/5/5" />
     <MESSAGE value="兼容旧版本数据库，添加更多报错提示" />
-    <option name="LAST_COMMIT_MESSAGE" value="兼容旧版本数据库，添加更多报错提示" />
+    <MESSAGE value="修复数据组越界" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复数据组越界" />
   </component>
 </project>

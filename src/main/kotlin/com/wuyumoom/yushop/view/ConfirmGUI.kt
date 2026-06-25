@@ -35,7 +35,7 @@ class ConfirmGUI(
             }
             val i = buyCount[nbt]
             if (i != null) {
-                shop.shopType.execute(product, player, count * i, shop)
+                shop.shopType.execute(product, player, count * i, shop,i)
                 draw(guiSession, player, view, buyCount)
                 return@onClick
             }

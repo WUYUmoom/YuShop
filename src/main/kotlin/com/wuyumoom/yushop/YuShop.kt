@@ -48,7 +48,7 @@ class YuShop : JavaPlugin() {
         if (ConfigManager.storage_mode == StorageType.YML) {
             Save.runTaskTimer(this, 20L, 20L)
         }
-        Bukkit.getPluginManager().registerEvents(PluginEvent(), YuShop.INSTANCE)
+        Bukkit.getPluginManager().registerEvents(PluginEvent(), this)
         DailyReset.start(this)
         Bukkit.getConsoleSender().sendMessage(*LOGO)
     }

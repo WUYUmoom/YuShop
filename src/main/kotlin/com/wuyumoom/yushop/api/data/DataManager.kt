@@ -133,6 +133,16 @@ object DataManager {
 	fun remove(player:String){
 		cache.remove(player)
 	}
+
+    /** 重置所有在线玩家的个人限购数据 */
+    fun resetAllPlayerLimit() {
+        cache.values.forEach { data ->
+            data.shopData.forEach { (_, shopData) ->
+                shopData.limit.clear()
+            }
+            data.time = LocalDateTime.now().format(PlayerData.formatter)
+        }
+    }
 }
 
 data class PlayerData(
@@ -171,5 +181,6 @@ data class PlayerData(
         val targetTime = plusDays.toLocalDate().atStartOfDay().plusMinutes(1)
         return now.isAfter(targetTime)
     }
+
 }
 

@@ -61,6 +61,9 @@ object DailyReset {
         try {
             DataManager.upDateLimit()
             Bukkit.getConsoleSender().sendMessage("§a[YuShop] §7✓ 限购数据已重置")
+
+            DataManager.resetAllPlayerLimit()
+            Bukkit.getConsoleSender().sendMessage("§a[YuShop] §7✓ 玩家个人限购数据已重置")
         } catch (e: Exception) {
             Bukkit.getConsoleSender().sendMessage("§c[YuShop] §7每日重置任务失败: ${e.message}")
             e.printStackTrace()

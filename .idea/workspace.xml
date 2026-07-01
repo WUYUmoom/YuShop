@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b30487da-fc3c-4b3a-bd05-041ea5770784" name="更改" comment="修复数据组越界">
-      <change beforePath="$PROJECT_DIR$/.idea/MarsCodeWorkspaceAppSettings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Minecraft_Server.xml" afterDir="false" />
+    <list default="true" id="b30487da-fc3c-4b3a-bd05-041ea5770784" name="更改" comment="修复扣除物品">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/YuShop.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/YuShop.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/api/type/ShopType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/api/type/ShopType.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/util/Util.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/util/Util.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/view/ConfirmGUI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/view/ConfirmGUI.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/api/data/DataManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/api/data/DataManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/api/money/IMoney.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/api/money/IMoney.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/runnable/DailyReset.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/wuyumoom/yushop/runnable/DailyReset.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -287,7 +283,18 @@
       <workItem from="1782220796127" duration="2729000" />
       <workItem from="1782283602400" duration="1495000" />
       <workItem from="1782286959715" duration="1799000" />
-      <workItem from="1782369205315" duration="5543000" />
+      <workItem from="1782369205315" duration="5647000" />
+      <workItem from="1782397711344" duration="1268000" />
+      <workItem from="1782401185247" duration="404000" />
+      <workItem from="1782401792823" duration="2292000" />
+      <workItem from="1782462340552" duration="1214000" />
+      <workItem from="1782472496023" duration="12000" />
+      <workItem from="1782490714154" duration="2317000" />
+      <workItem from="1782547650837" duration="599000" />
+      <workItem from="1782558477056" duration="1818000" />
+      <workItem from="1782573654456" duration="788000" />
+      <workItem from="1782628437403" duration="1253000" />
+      <workItem from="1782915338175" duration="297000" />
     </task>
     <task id="LOCAL-00001" summary="初始提交">
       <option name="closed" value="true" />
@@ -361,7 +368,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781853404050</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="修复扣除物品">
+      <option name="closed" value="true" />
+      <created>1782394781501</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1782394781501</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -377,6 +392,7 @@
     <MESSAGE value="2026/5/5" />
     <MESSAGE value="兼容旧版本数据库，添加更多报错提示" />
     <MESSAGE value="修复数据组越界" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复数据组越界" />
+    <MESSAGE value="修复扣除物品" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复扣除物品" />
   </component>
 </project>

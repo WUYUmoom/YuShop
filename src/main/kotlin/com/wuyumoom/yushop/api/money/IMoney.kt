@@ -1,6 +1,5 @@
 package com.wuyumoom.yushop.api.money
 
-import com.wuyumoom.yushop.model.Product
 import org.bukkit.entity.Player
 
 interface IMoney {
